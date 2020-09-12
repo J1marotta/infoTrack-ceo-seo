@@ -10,7 +10,9 @@ const useStore = create(set => ({
   clearSearch: () => set(() => ({ searchQuery: '' })),
   mode: 'business',
   setMode: () => set(state => ({
-    mode: state.mode === 'business' ? 'fancy' : 'business'
+    mode: state.mode === 'business'
+      ? 'fancy'
+      : 'business'
   }))
 }))
 

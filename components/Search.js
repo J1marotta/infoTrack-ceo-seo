@@ -28,9 +28,8 @@ const Search = ({ mode, clearSearch, setSearch, searchQuery }) => {
         background: 'grey'
       },
       fancy: {
-        background: 'red',
-        padding: '20px 20px',
-        scale: 2,
+        background: 'white',
+        padding: '5px 5px',
       },      
     },
     form: {
@@ -39,7 +38,7 @@ const Search = ({ mode, clearSearch, setSearch, searchQuery }) => {
     },
     button: {
       business: {
-        padding: '10px',
+        padding: '4px',
       },
       fancy: {
         whileHove:{ scale: 1.1 },
@@ -51,10 +50,10 @@ const Search = ({ mode, clearSearch, setSearch, searchQuery }) => {
       fancy: {},      
     }
   }
-  console.log({mode,S: searchQuery})
 
   return (
-    <m.AnimateSharedLayout>
+    <div
+    >
     <m.form
       {...animationProps(mode)}
       variants={variants.form} 
@@ -115,7 +114,7 @@ const Search = ({ mode, clearSearch, setSearch, searchQuery }) => {
 
       </m.div>
     </m.form>
-    </m.AnimateSharedLayout>
+    </div>
   )
 }
 

@@ -17,29 +17,38 @@ const Switch = ({ mode, setMode }) => {
       business: {},
       fancy: {}
     },
+    div: {
+      business: { border: '1px solid grey' },
+      fancy: {}
+  },
 
   }
 
 
   return (
-    <m.label
+    <m.div
       {...animationProps(mode)}
-      variants={variants.label}
-      className="switch"
+      variants={variants.div}
     >
-      <m.input
+      <m.label
         {...animationProps(mode)}
-        type="checkbox"
-        variants={variants.input}
-        value={mode}
-        onChange={() => setMode()}
-      />
-      <m.span
-        {...animationProps(mode)}
-        className="slider"
-        variants={variants.span}
-      />
-    </m.label>
+        variants={variants.label}
+        className="switch"
+      >
+        <m.input
+          {...animationProps(mode)}
+          type="checkbox"
+          variants={variants.input}
+          value={mode}
+          onChange={() => setMode()}
+        />
+        <m.span
+          {...animationProps(mode)}
+          className="slider"
+          variants={variants.span}
+        />
+        </m.label>
+      </m.div>
   )
 } 
 
