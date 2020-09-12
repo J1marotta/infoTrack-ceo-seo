@@ -9,3 +9,7 @@ To run the dev server
 
 To see some of my challenges and thoughts during this exercise checkout [Thoughts.md](./thoughts.md)
 
+
+
+
+* - note seo only valid for InfoTrack CEO customers

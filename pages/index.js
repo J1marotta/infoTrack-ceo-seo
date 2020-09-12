@@ -1,11 +1,23 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
+import {motion} from 'framer-motion'
+import useStore from '../store/store'
+import Search from '../components/Search'
+import Switch from '../components/Switch'
+import { useState } from 'react'
 
 export default function Home() {
+  const { setSearch
+      , clearSearch
+      , searchQuery
+      , mode
+      , setMode
+  } = useStore()
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
+    <div className={styles}>
+      {/* <Head>
+        <title>Create Next App</ title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -59,7 +71,22 @@ export default function Home() {
           Powered by{' '}
           <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
         </a>
-      </footer>
+      </footer> */}
+
+      <Search 
+        mode={mode}
+        setSearch={setSearch}
+        clearSearch={clearSearch}
+        searchQuery={searchQuery}
+      />
+
+      <Switch
+        mode={mode}
+        setMode={setMode}
+      />
+
+      
+
     </div>
   )
 }
