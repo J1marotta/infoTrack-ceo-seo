@@ -23,8 +23,11 @@ const Search = ({ mode, clearSearch, setSearch, searchQuery }) => {
     },
     div: {
       business: {
+        borderWidth: '2px',
+        borderStyle: 'inset',
+        borderColor: 'black',
         padding: '0px 0px',
-        background: 'grey',
+        background: '#6c6c6c',
       },
       fancy: {
         background: 'white',
@@ -55,7 +58,7 @@ const Search = ({ mode, clearSearch, setSearch, searchQuery }) => {
     input: {
       business: {
         height: '50px',
-        width: '100px',
+        width: '300px',
         padding: '0px',
         marginRight: '0px',
       },
@@ -74,9 +77,8 @@ const Search = ({ mode, clearSearch, setSearch, searchQuery }) => {
   })
 
   return (
-    <m.div {...animationProps(mode)} variants={variants.div}>
+    <m.div {...animationProps(mode)(2)(2.5)} variants={variants.div}>
       <m.form
-        {...animationProps(mode)}
         variants={variants.form}
         onSubmit={(e) => {
           e.preventDefault()
@@ -84,16 +86,11 @@ const Search = ({ mode, clearSearch, setSearch, searchQuery }) => {
         className={styles.searchContainer}
       >
         <div className={styles.searchInput}>
-          <m.label
-            {...animationProps(mode)}
-            variants={variants.label}
-            htmlFor="searchInput"
-          >
+          <m.label variants={variants.label} htmlFor="searchInput">
             {searchLabel}
           </m.label>
 
           <m.input
-            {...animationProps(mode)}
             variants={variants.input}
             type="text"
             id="searchInput"
@@ -106,17 +103,12 @@ const Search = ({ mode, clearSearch, setSearch, searchQuery }) => {
         <div>
           <div>
             <m.button
-              {...animationProps(mode)}
               {...sharedButtonProps(mode)}
               variants={variants.button}
               type="submit"
               id="search"
             >
-              <m.label
-                htmlFor="search"
-                {...animationProps(mode)}
-                variants={variants.label}
-              >
+              <m.label htmlFor="search" variants={variants.label}>
                 Search
               </m.label>
             </m.button>
@@ -126,7 +118,6 @@ const Search = ({ mode, clearSearch, setSearch, searchQuery }) => {
             <m.button
               id="clear"
               name="clear"
-              {...animationProps(mode)}
               {...sharedButtonProps(mode)}
               variants={variants.button}
               type="button"
