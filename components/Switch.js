@@ -35,10 +35,7 @@ const Switch = ({ mode, setMode }) => {
       },
       fancy: {
         border: '0px solid grey',
-        paddingTop: '10px',
-        paddingBottom: '10px',
-        paddingLeft: '10px',
-        paddingRight: '10px',
+        padding: '10px',
       },
     },
   }

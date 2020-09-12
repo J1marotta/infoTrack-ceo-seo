@@ -42,6 +42,8 @@ const Search = ({ mode, clearSearch, setSearch, searchQuery }) => {
     button: {
       business: {
         padding: '4px',
+        height: '30px',
+        width: '100px',
       },
       fancy: {
         height: '50px',
@@ -52,7 +54,10 @@ const Search = ({ mode, clearSearch, setSearch, searchQuery }) => {
     },
     input: {
       business: {
+        height: '50px',
+        width: '100px',
         padding: '0px',
+        marginRight: '0px',
       },
       fancy: {
         height: '50px',
