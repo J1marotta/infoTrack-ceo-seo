@@ -1,0 +1,22 @@
+.searchContainer {
+  display: grid;
+  height: 100%;
+  width: 100%;
+  gap: 1em;
+  grid-template-columns: 1fr;
+}
+
+@media (min-aspect-ratio: 4/3) {
+  .searchContainer {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.searchInput {
+  display: grid;
+  grid-template-rows: 40px 1fr;
+}
+
+#search {
+  width: 100%;
+}

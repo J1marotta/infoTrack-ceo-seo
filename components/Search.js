@@ -1,123 +1,146 @@
-import {motion as m} from 'framer-motion'
+import { motion as m } from 'framer-motion'
 import { animationProps } from './animationProps'
+import styles from '../styles/Search.module.css'
 
 const Search = ({ mode, clearSearch, setSearch, searchQuery }) => {
-  const searchLabel = mode  === 'fancy' 
-    ? 'Seo Search'
-    : 'Enter Search Parameters for Seo Search'
+  const searchLabel =
+    mode === 'fancy' ? 'Seo Search' : 'Enter Search Parameters for Seo Search'
 
-  const searchPlaceHolder = mode  === 'fancy' 
-    ? '...'
-    : 'You can type here to search.'
+  const searchPlaceHolder =
+    mode === 'fancy' ? '...' : 'You can type here to search.'
 
-  
   const variants = {
     label: {
       business: {
         padding: '0px',
-
+        fontFamily: 'Times',
       },
       fancy: {
-        padding: '30px',
-        fontFamily: 'monoSpace'
-      },      
+        padding: '10px',
+        width: '100%',
+        fontFamily: 'Courier',
+      },
     },
     div: {
       business: {
         padding: '0px 0px',
-        background: 'grey'
+        background: 'grey',
       },
       fancy: {
         background: 'white',
         padding: '5px 5px',
-      },      
+      },
     },
     form: {
-      business: {},
-      fancy: {},      
+      business: {
+        padding: '0px',
+      },
+      fancy: {
+        padding: '10px',
+      },
     },
     button: {
       business: {
         padding: '4px',
       },
       fancy: {
-        whileHove:{ scale: 1.1 },
-        whileTap:{ scale: 0.9 }
-      },      
+        height: '50px',
+        width: '100%',
+        whileHover: { scale: 1.001 },
+        onTap: { scale: 0.7 },
+      },
     },
     input: {
-      business: {},
-      fancy: {},      
-    }
+      business: {
+        padding: '0px',
+      },
+      fancy: {
+        height: '50px',
+        width: '100%',
+        padding: '10px',
+        marginRight: '10px',
+      },
+    },
   }
 
-  return (
-    <div
-    >
-    <m.form
-      {...animationProps(mode)}
-      variants={variants.form} 
-      onSubmit={e => {
-      e.preventDefault()
-    }}>
-    <m.div 
-      {...animationProps(mode)}
-      variants={console.log('d',mode) || variants.div}
-    >
-      <m.label 
-        {...animationProps(mode)}
-        variants={variants.label}
-        htmlFor='searchInput'
-      >
-        {searchLabel}
-      </m.label>
+  const sharedButtonProps = (mode) => ({
+    whileHover: { scale: mode === 'fancy' ? 1.2 : 1 },
+    whileTap: { scale: mode === 'fancy' ? 0.9 : 1 },
+  })
 
-      <m.input 
-        type='text' 
-        id='search' 
-        name='search' 
-        value={searchQuery} 
-        onChange={({ target: { value } }) => setSearch(value) }
-      />
-       
-        <m.button 
-          {...animationProps(mode)}
-          variants={variants.button}
-          type="submit" 
-          id='search'
-        > 
-          <m.label 
-            htmlFor='search'
+  return (
+    <m.div {...animationProps(mode)} variants={variants.div}>
+      <m.form
+        {...animationProps(mode)}
+        variants={variants.form}
+        onSubmit={(e) => {
+          e.preventDefault()
+        }}
+        className={styles.searchContainer}
+      >
+        <div className={styles.searchInput}>
+          <m.label
             {...animationProps(mode)}
             variants={variants.label}
+            htmlFor="searchInput"
           >
-            Search
-          </m.label> 
-         </m.button>
+            {searchLabel}
+          </m.label>
 
-        <m.button 
-          id="clear"
-          name="clear"
-          {...animationProps(mode)}
-          variants={variants.button}
-          type="button" onClick={() => clearSearch()}
-        >
-         <m.label 
-            htmlFor='clear'
-            initial="business"
-            animate={mode}
-            variants={variants.label}
-          >
-            clear
-          </m.label> 
-        </m.button>
+          <m.input
+            {...animationProps(mode)}
+            variants={variants.input}
+            type="text"
+            id="searchInput"
+            name="search"
+            value={searchQuery}
+            onChange={({ target: { value } }) => setSearch(value)}
+          />
+        </div>
 
-      </m.div>
-    </m.form>
-    </div>
+        <div>
+          <div>
+            <m.button
+              {...animationProps(mode)}
+              {...sharedButtonProps(mode)}
+              variants={variants.button}
+              type="submit"
+              id="search"
+            >
+              <m.label
+                htmlFor="search"
+                {...animationProps(mode)}
+                variants={variants.label}
+              >
+                Search
+              </m.label>
+            </m.button>
+          </div>
+
+          <div>
+            <m.button
+              id="clear"
+              name="clear"
+              {...animationProps(mode)}
+              {...sharedButtonProps(mode)}
+              variants={variants.button}
+              type="button"
+              onClick={() => clearSearch()}
+            >
+              <m.label
+                htmlFor="clear"
+                initial="business"
+                animate={mode}
+                variants={variants.label}
+              >
+                clear
+              </m.label>
+            </m.button>
+          </div>
+        </div>
+      </m.form>
+    </m.div>
   )
 }
-
-
 
 export default Search
