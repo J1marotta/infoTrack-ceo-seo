@@ -1,0 +1,12 @@
+.resultsContainer {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr 1fr;
+  height: 100%;
+  width: 100%;
+}
+
+.results {
+  height: 100px;
+  width: 100px;
+}

@@ -1,5 +1,5 @@
 import { motion as m } from 'framer-motion'
-import { animationProps } from './animationProps'
+import { animationProps } from './index'
 
 const Switch = ({ mode, setMode }) => {
   const variants = {

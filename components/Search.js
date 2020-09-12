@@ -1,5 +1,5 @@
 import { motion as m } from 'framer-motion'
-import { animationProps } from './animationProps'
+import { animationProps } from './index'
 import styles from '../styles/Search.module.css'
 
 const Search = ({ mode, clearSearch, setSearch, searchQuery }) => {

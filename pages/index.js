@@ -1,16 +1,21 @@
 import { motion as m } from 'framer-motion'
 import styles from '../styles/Home.module.css'
 import useStore from '../store/store'
-import Search from '../components/Search'
-import Switch from '../components/Switch'
-import Meta from '../components/Meta'
-import { animationProps } from '../components/animationProps'
+import { Search, Switch, Meta, Results, animationProps } from '../components'
 
 export default function Home() {
-  const { setSearch, clearSearch, searchQuery, mode, setMode } = useStore()
+  const {
+    setSearch,
+    clearSearch,
+    searchQuery,
+    mode,
+    setMode,
+    googleData,
+    bingData,
+  } = useStore()
 
   const footerWords = (mode) =>
-    console.log({ mode }) || mode === 'business' ? `CEO SEO - Powered by: ` : ''
+    mode === 'business' ? `CEO SEO - Powered by: ` : ''
 
   const variants = {
     container: {
@@ -42,6 +47,7 @@ export default function Home() {
         />
 
         <Switch mode={mode} setMode={setMode} />
+        <Results mode={mode} googleData={googleData} bingData={bingData} />
         <footer
           className={mode === 'fancy' ? styles.footerAlign : styles.footer}
         >

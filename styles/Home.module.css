@@ -11,7 +11,6 @@
   align-items: center;
   justify-content: center;
   max-width: 800px;
-  max-height: 60%;
   margin-top: 3rem;
   grid-template-rows: 1fr;
   gap: 2em;
@@ -28,13 +27,13 @@
 .footerAlign {
   justify-content: center;
   position: relative;
-  top: 55vh;
+  top: 15vh;
   width: 100%;
   display: flex;
 }
 
 .footer {
-  top: 55vh;
+  top: 15vh;
   position: relative;
   width: 100%;
   display: flex;

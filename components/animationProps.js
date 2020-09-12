@@ -1,4 +1,4 @@
-export const animationProps = (mode) => ({
+const animationProps = (mode) => ({
   initial: 'business',
   animate: mode,
   transition: {
@@ -7,3 +7,5 @@ export const animationProps = (mode) => ({
   },
   layout: true,
 })
+
+export default animationProps
