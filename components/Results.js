@@ -59,7 +59,7 @@ const Results = ({ mode, googleSeo, bingSeo }) => {
 
   return (
     <m.div
-      {...animationProps(mode)(2.5)(3)}
+      {...animationProps(mode)(3)(4)}
       variants={variants.div}
       className={styles.resultsContainer}
     >

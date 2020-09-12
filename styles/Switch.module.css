@@ -1,0 +1,35 @@
+.switchContainer {
+  display: flex;
+  align-items: center;
+  padding: 1em;
+  flex-direction: column;
+}
+
+.spaceNames {
+  justify-items: space-between;
+  display: flex;
+}
+
+.switch {
+  width: 100px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.4);
+  display: flex;
+  justify-content: flex-start;
+  border-radius: 30px;
+  padding: 10px;
+  cursor: pointer;
+  border: 1px solid #333;
+}
+
+.switch[data-isOn='fancy'] {
+  justify-content: flex-end;
+}
+
+.handle {
+  width: 40px;
+  height: 18px;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid #444444;
+}

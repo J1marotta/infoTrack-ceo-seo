@@ -30,6 +30,7 @@ const Search = ({ mode, clearSearch, setSearch, searchQuery }) => {
         background: '#6c6c6c',
       },
       fancy: {
+        borderStyle: 'none',
         background: 'white',
         padding: '5px 5px',
       },
@@ -69,6 +70,14 @@ const Search = ({ mode, clearSearch, setSearch, searchQuery }) => {
         marginRight: '10px',
       },
     },
+    buttons: {
+      business: {
+        x: 100,
+      },
+      fancy: {
+        x: 0,
+      },
+    },
   }
 
   const sharedButtonProps = (mode) => ({
@@ -100,7 +109,7 @@ const Search = ({ mode, clearSearch, setSearch, searchQuery }) => {
           />
         </div>
 
-        <div>
+        <m.div variants={variants.buttons}>
           <div>
             <m.button
               {...sharedButtonProps(mode)}
@@ -133,7 +142,7 @@ const Search = ({ mode, clearSearch, setSearch, searchQuery }) => {
               </m.label>
             </m.button>
           </div>
-        </div>
+        </m.div>
       </m.form>
     </m.div>
   )
