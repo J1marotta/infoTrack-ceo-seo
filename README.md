@@ -2,7 +2,7 @@
 
 The fastest way to know \*your Seo score
 
-App is deployed [here](https://vercel.com/jamesmarotta/info-track)
+App is deployed [here](https://info-track.vercel.app/)
 
 If you want to use the code locally :
 
@@ -19,7 +19,7 @@ To run the dev server
 Currently it talks to a small express server which is hosted for free on [glitch](https://glitch.com/edit/#!/sudden-magic-pressure)
 The app talks to [this Url](https://sudden-magic-pressure.glitch.me)
 
-The code is also available [here](https://github.com/J1marotta/Info-track-scraper)
+The server code is also available locally [here](https://github.com/J1marotta/Info-track-scraper)
 
 You might need to wake it before it works, as they goto sleep after 5 minutes.
 
