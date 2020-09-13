@@ -32,6 +32,7 @@ export default function Home() {
 
   return (
     <AnimateSharedLayout>
+      <ErrorComponent />
       <m.div
         {...animationProps(mode)(1.5)(2.5)}
         variants={variants.container}
@@ -63,7 +64,6 @@ export default function Home() {
           </footer>
         </div>
       </m.div>
-      <ErrorComponent />
     </AnimateSharedLayout>
   )
 }

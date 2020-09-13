@@ -1,35 +1,10 @@
 import { motion as m, transform, useAnimation } from 'framer-motion'
-import { useState, useEffect } from 'react'
 import styles from '../styles/Results.module.css'
 import { animationProps } from './index'
 import useStore from '../store/store'
 
-const dummyData = [
-  {
-    Page02: [],
-  },
-  {
-    Page01: [0],
-  },
-  {
-    Page03: [],
-  },
-  {
-    Page04: [],
-  },
-  {
-    Page05: [],
-  },
-].sort((a, b) => a - b)
-
 const Results = () => {
   const { googleData, bingData, mode } = useStore()
-
-  const colors = mode === 'fancy' ? ['#f4dd03', '#00d4ff'] : ['#333', '#6c6c6c']
-
-  // transform digits to colors
-  const mapRemainingToColor = transform([10, 1], colors)
-  const controls = useAnimation()
 
   const variants = {
     results: {
@@ -66,8 +41,11 @@ const Results = () => {
       <div className="results">
         <m.div variants={variants.results}>
           GOOGLE:
-          <m.div animate={controls} style={{ height: 'fit-content' }}>
-            <pre>{JSON.stringify(dummyData, null, 2)}</pre>
+          <m.div
+            {...animationProps(mode)(3)(4)}
+            style={{ height: 'fit-content' }}
+          >
+            <pre>{JSON.stringify(googleData, null, 2)}</pre>
           </m.div>
         </m.div>
       </div>
@@ -75,8 +53,11 @@ const Results = () => {
       <div className="results">
         <m.div variants={variants.results}>
           BING:
-          <m.div animate={controls} style={{ height: 'fit-content' }}>
-            <pre>{JSON.stringify(dummyData, null, 2)}</pre>
+          <m.div
+            {...animationProps(mode)(3)(4)}
+            style={{ height: 'fit-content' }}
+          >
+            <pre>{JSON.stringify(bingData, null, 2)}</pre>
           </m.div>
         </m.div>
       </div>

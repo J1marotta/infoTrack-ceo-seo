@@ -114,3 +114,9 @@ Again probably not the best use case for `mode` but just some information around
 I Had to update this to be an object so I could have separate error and loading states for the UI, as I wanted the search button to disable when animating and the bottom to show a spinner when loading.
 
 This now has problems with resetting the animations as the components are remounting so I will have to think up something else.
+
+#### Web Scraping
+
+I've never done any webscraping or JQuery before, so playing around with `cheerio` from npm on the server, was interesting. ultimately I hit some walls I didn't really know where to fix them, using selectors in the real browser I could select results from real google, but unfortunately converting the `NodeList` which cheerio returns from real google, wouldn't let me convert it to an array to be able to manipulate it. So I had to stop.
+
+Fancy mode now also only hits the cached sites, which unfortunately means we are not using the Queries that you type it, it's a fixed result (this was confusing for me to understand from the beginner so I figured I'd add in the real google results)
