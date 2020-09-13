@@ -2,7 +2,7 @@ import { motion as m } from 'framer-motion'
 import { animationProps } from './index'
 import styles from '../styles/Switch.module.css'
 
-const Switch = ({ mode, setMode }) => {
+const Switch = ({ mode, setMode, setStatus }) => {
   const variants = {
     label: {
       business: {
@@ -71,28 +71,26 @@ const Switch = ({ mode, setMode }) => {
       variants={variants.div}
       className={styles.switchContainer}
     >
-      <m.div
+      <m.button
         variants={variants.switch}
         className={styles.switch}
-        data-isOn={mode}
+        data-mode={mode}
         role="radio"
         id="fancy mode"
-        onClick={() => setMode()}
+        onClick={() => {
+          setMode()
+          setTimeout(() => {
+            setStatus('ready')
+          }, 2500)
+        }}
+        tabIndex={0}
       >
         <m.div className={styles.handle} variants={variants.handle} layout />
-      </m.div>
+      </m.button>
 
       <div className={styles.spaceNames}>
-        <m.span variants={variants.span}>
-          <m.label variants={variants.label} htmlFor="fancy mode">
-            Business
-          </m.label>
-        </m.span>
-        <m.span variants={variants.span}>
-          <m.label variants={variants.label} htmlFor="fancy mode">
-            Fancy
-          </m.label>
-        </m.span>
+        <m.span variants={variants.span}>Business</m.span>
+        <m.span variants={variants.span}>Fancy</m.span>
       </div>
     </m.div>
   )

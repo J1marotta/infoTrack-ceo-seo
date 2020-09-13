@@ -22,7 +22,7 @@
   border: 1px solid #333;
 }
 
-.switch[data-isOn='fancy'] {
+.switch[data-mode='fancy'] {
   justify-content: flex-end;
 }
 

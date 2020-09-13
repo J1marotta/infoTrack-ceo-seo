@@ -12,6 +12,8 @@ export default function Home() {
     setMode,
     googleData,
     bingData,
+    status,
+    setStatus,
   } = useStore()
 
   const footerWords = (mode) =>
@@ -45,9 +47,10 @@ export default function Home() {
             setSearch={setSearch}
             clearSearch={clearSearch}
             searchQuery={searchQuery}
+            status={status}
           />
 
-          <Switch mode={mode} setMode={setMode} />
+          <Switch mode={mode} setMode={setMode} setStatus={setStatus} />
           <Results mode={mode} googleData={googleData} bingData={bingData} />
           <footer
             className={mode === 'fancy' ? styles.footerAlign : styles.footer}

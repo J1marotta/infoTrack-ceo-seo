@@ -1,8 +1,9 @@
 import { motion as m } from 'framer-motion'
 import { animationProps } from './index'
 import styles from '../styles/Search.module.css'
+import { fetchData } from '../store/FetchData'
 
-const Search = ({ mode, clearSearch, setSearch, searchQuery }) => {
+const Search = ({ mode, clearSearch, setSearch, searchQuery, status }) => {
   const searchLabel =
     mode === 'fancy' ? 'Seo Search' : 'Enter Search Parameters for Seo Search'
 
@@ -48,6 +49,8 @@ const Search = ({ mode, clearSearch, setSearch, searchQuery }) => {
         padding: '4px',
         height: '30px',
         width: '100px',
+        whileHover: { scale: 1 },
+        onTap: { scale: 1 },
       },
       fancy: {
         height: '50px',
@@ -91,6 +94,7 @@ const Search = ({ mode, clearSearch, setSearch, searchQuery }) => {
         variants={variants.form}
         onSubmit={(e) => {
           e.preventDefault()
+          fetchData(searchQuery)
         }}
         className={styles.searchContainer}
       >
@@ -100,6 +104,7 @@ const Search = ({ mode, clearSearch, setSearch, searchQuery }) => {
           </m.label>
 
           <m.input
+            disabled={status !== 'ready'}
             variants={variants.input}
             type="text"
             id="searchInput"
