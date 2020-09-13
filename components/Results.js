@@ -66,24 +66,22 @@ const Results = ({ mode, googleSeo, bingSeo }) => {
       <div className="results">
         <m.div variants={variants.results}>
           GOOGLE:
-          <m.span
+          <m.div
             animate={controls}
             style={{ color: mapRemainingToColor(newGoogleSeo) }}
           >
             {newGoogleSeo}
-          </m.span>
+          </m.div>
         </m.div>
       </div>
 
       <div className="results">
         <m.div variants={variants.results}>
           BING:
-          <m.span
+          <m.div
             animate={controls}
             style={{ color: mapRemainingToColor(newBingSeo) }}
-          >
-            {newBingSeo}
-          </m.span>
+          ></m.div>
         </m.div>
       </div>
     </m.div>

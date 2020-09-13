@@ -56,3 +56,57 @@ Framer is an awesome Library and I think with a bit more tweaking this could be 
 Additionally because of the way I did the variations, usingReduced motion for accessability will make it harder as well.
 
 Overall it's actually been really fun playing with the animations.
+
+### zustand
+
+Overall A very nice library, but I think I would avoid using the `useStore` hook and instead just export the `getState` and `setState` functions from `zustand/vanilla`
+
+I originally wanted to just pass the state down from my index.js to the components so I had the single point of entry but this proves annoying, and it's much nicer to just pluck what you need from `getState` and instead of having specific functions as keys in the store you can juse use `setState` nice an easily when ever you need it.
+
+### Declarative views
+
+```
+ mode === 'fancy' ? x : y
+
+ vs
+
+ isFancy ? x : Y
+
+```
+
+While not the best use case for this with only two states, I've found I really enjoy writing declarative states instead of booleans which allows for much nicer to read view code
+
+for example
+
+```
+ const view = ({ isLoading, isError }) =>  {
+  if(isError){
+    <div>Error </div>
+  }else if(isLoading) {
+    <div>Loading</div>
+  }
+  <div>Success </div>
+
+ }
+
+
+vs
+
+const view = ({status }) => {
+  if (status === 'error'){
+    <div>error</div>
+  }
+  if (status === 'loading'){
+    <div>loading</div>
+  }
+  if (status === 'ready'){
+    <div>Sucess</div>
+  }
+}
+
+```
+
+I think this allows for a much nicer way of handing state for the views, especially if you have several conditions to meet before getting to the happy path, bonus it makes it easier to add additional states later on, plus because it's declarative you know exactly what state you're in.
+
+I'd love to know your opinion on this vsing lots of bools everywhere which can quickly get overwhelming if you have more than 2 to check.
+Again probably not the best use case for `mode` but just some information around why I chose this style.

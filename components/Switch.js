@@ -1,8 +1,11 @@
 import { motion as m } from 'framer-motion'
 import { animationProps } from './index'
 import styles from '../styles/Switch.module.css'
+import useStore from '../store/store'
 
-const Switch = ({ mode, setMode, setStatus }) => {
+const Switch = () => {
+  const { mode, set } = useStore()
+
   const variants = {
     label: {
       business: {
@@ -62,9 +65,6 @@ const Switch = ({ mode, setMode, setStatus }) => {
     },
   }
 
-  const buttonText = (mode) =>
-    mode === 'fancy' ? 'uncheck for all business' : 'Make it Fancy'
-
   return (
     <m.div
       {...animationProps(mode)(2.5)(3)}
@@ -80,7 +80,7 @@ const Switch = ({ mode, setMode, setStatus }) => {
         onClick={() => {
           setMode()
           setTimeout(() => {
-            setStatus('ready')
+            set('status')('ready')
           }, 2500)
         }}
         tabIndex={0}

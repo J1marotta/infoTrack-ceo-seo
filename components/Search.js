@@ -2,22 +2,20 @@ import { motion as m } from 'framer-motion'
 import { animationProps } from './index'
 import styles from '../styles/Search.module.css'
 import { fetchData } from '../store/FetchData'
+import useStore from '../store/store'
 
-const Search = ({ mode, clearSearch, setSearch, searchQuery, status }) => {
+const Search = () => {
+  const { mode, searchQuery, status, set } = useStore()
+
   const searchLabel =
     mode === 'fancy' ? 'Seo Search' : 'Enter Search Parameters for Seo Search'
-
-  const searchPlaceHolder =
-    mode === 'fancy' ? '...' : 'You can type here to search.'
 
   const variants = {
     label: {
       business: {
-        padding: '0px',
         fontFamily: 'Times',
       },
       fancy: {
-        padding: '10px',
         width: '100%',
         fontFamily: 'Courier',
       },
@@ -32,7 +30,7 @@ const Search = ({ mode, clearSearch, setSearch, searchQuery, status }) => {
       },
       fancy: {
         borderStyle: 'none',
-        background: 'white',
+        background: '#fff',
         padding: '5px 5px',
       },
     },
@@ -49,14 +47,10 @@ const Search = ({ mode, clearSearch, setSearch, searchQuery, status }) => {
         padding: '4px',
         height: '30px',
         width: '100px',
-        whileHover: { scale: 1 },
-        onTap: { scale: 1 },
       },
       fancy: {
         height: '50px',
         width: '100%',
-        whileHover: { scale: 1.001 },
-        onTap: { scale: 0.7 },
       },
     },
     input: {
@@ -94,7 +88,12 @@ const Search = ({ mode, clearSearch, setSearch, searchQuery, status }) => {
         variants={variants.form}
         onSubmit={(e) => {
           e.preventDefault()
-          fetchData(searchQuery)
+          console.log('submit')
+          fetchData({
+            searchQuery,
+            mode,
+            set,
+          })
         }}
         className={styles.searchContainer}
       >
@@ -110,7 +109,9 @@ const Search = ({ mode, clearSearch, setSearch, searchQuery, status }) => {
             id="searchInput"
             name="search"
             value={searchQuery}
-            onChange={({ target: { value } }) => setSearch(value)}
+            onChange={({ target: { value } }) => {
+              set('searchQuery')(value)
+            }}
           />
         </div>
 
@@ -135,7 +136,7 @@ const Search = ({ mode, clearSearch, setSearch, searchQuery, status }) => {
               {...sharedButtonProps(mode)}
               variants={variants.button}
               type="button"
-              onClick={() => clearSearch()}
+              onClick={() => setState({ searchQuery: '' })}
             >
               <m.label
                 htmlFor="clear"

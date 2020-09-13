@@ -4,17 +4,7 @@ import useStore from '../store/store'
 import { Search, Switch, Meta, Results, animationProps } from '../components'
 
 export default function Home() {
-  const {
-    setSearch,
-    clearSearch,
-    searchQuery,
-    mode,
-    setMode,
-    googleData,
-    bingData,
-    status,
-    setStatus,
-  } = useStore()
+  const { status, mode, setMode } = useStore()
 
   const footerWords = (mode) =>
     mode === 'business' ? `CEO SEO - Powered by: ` : ''
@@ -33,43 +23,47 @@ export default function Home() {
     },
   }
 
-  return (
-    <AnimateSharedLayout>
-      <m.div
-        {...animationProps(mode)(1.5)(2.5)}
-        variants={variants.container}
-        className={styles.container}
-      >
-        <Meta />
-        <div className={styles.grid}>
-          <Search
-            mode={mode}
-            setSearch={setSearch}
-            clearSearch={clearSearch}
-            searchQuery={searchQuery}
-            status={status}
-          />
+  if (status === 'error') {
+    return <div>Sorry something went wrong please refresh</div>
+  }
 
-          <Switch mode={mode} setMode={setMode} setStatus={setStatus} />
-          <Results mode={mode} googleData={googleData} bingData={bingData} />
-          <footer
-            className={mode === 'fancy' ? styles.footerAlign : styles.footer}
-          >
-            <a
-              href="https://InfoTrack.com.au"
-              target="_blank"
-              rel="noopener noreferrer"
+  if (status === 'loading') {
+    return <div>...</div>
+  }
+
+  if (status === 'ready') {
+    return (
+      <AnimateSharedLayout>
+        <m.div
+          {...animationProps(mode)(1.5)(2.5)}
+          variants={variants.container}
+          className={styles.container}
+        >
+          <Meta />
+          <div className={styles.grid}>
+            <Search />
+
+            <Switch setMode={setMode} />
+            <Results />
+            <footer
+              className={mode === 'fancy' ? styles.footerAlign : styles.footer}
             >
-              {footerWords(mode)}
-              <img
-                src="/logo.png"
-                alt="InfoTrack Logo"
-                className={styles.logo}
-              />
-            </a>
-          </footer>
-        </div>
-      </m.div>
-    </AnimateSharedLayout>
-  )
+              <a
+                href="https://InfoTrack.com.au"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {footerWords(mode)}
+                <img
+                  src="/logo.png"
+                  alt="InfoTrack Logo"
+                  className={styles.logo}
+                />
+              </a>
+            </footer>
+          </div>
+        </m.div>
+      </AnimateSharedLayout>
+    )
+  }
 }

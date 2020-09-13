@@ -1,13 +1,12 @@
 import create from 'zustand'
 
 const useStore = create((set) => ({
+  set: (y) => (x) => set(() => ({ [y]: x })),
   googleSeo: 20,
   bingSeo: 100,
   googleData: [],
   bingData: [],
   searchQuery: '',
-  setSearch: (x) => set(() => ({ searchQuery: x })),
-  clearSearch: () => set(() => ({ searchQuery: '' })),
   mode: 'business',
   setMode: () =>
     set((state) => ({
@@ -15,7 +14,6 @@ const useStore = create((set) => ({
       mode: state.mode === 'business' ? 'fancy' : 'business',
     })),
   status: 'ready',
-  setStatus: (x) => set(() => ({ status: x })),
 }))
 
 export default useStore
