@@ -141,7 +141,8 @@ Fancy mode now also only hits the cached sites, which unfortunately means we are
 #### Overall
 
 I really enjoyed being able to try a bunch of new libraries, that really made this a lot more fun and gave me a much better sense of pride in it compared to other technical test I've done.
-
 I think I definitely bit off a bit too much with the design, but I learned a lot about Framer-motion and it was an enjoyable weekend of coding.
+
+I wanted to make something a bit silly and hopefully spark some laughs
 
 I look forward to the follow up.

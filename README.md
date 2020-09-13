@@ -2,6 +2,10 @@
 
 The fastest way to know \*your Seo score
 
+App is deployed [here](https://vercel.com/jamesmarotta/info-track)
+
+If you want to use the code locally :
+
 To run the dev server
 
 ```bash
