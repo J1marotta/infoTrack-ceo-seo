@@ -21,8 +21,6 @@ You might need to wake it before it works, as they goto sleep after 5 minutes.
 
 To see some of my challenges and thoughts during this exercise checkout [Thoughts.md](./thoughts.md)
 
-- - note seo only valid for InfoTrack CEO customers
-
 #### How to use
 
 Type a query and checks the for any links which include InfoTrack in the href, of the results
@@ -38,3 +36,5 @@ The animations have some delay (see [thoughts.md](./thoughts.md) for more on tha
 ![](./public/button.png)
 
 based on the mode it will either hit the cached
+
+\*- - note seo only valid for InfoTrack CEO customers
