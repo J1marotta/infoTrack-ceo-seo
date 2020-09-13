@@ -110,3 +110,7 @@ I think this allows for a much nicer way of handing state for the views, especia
 
 I'd love to know your opinion on this vsing lots of bools everywhere which can quickly get overwhelming if you have more than 2 to check.
 Again probably not the best use case for `mode` but just some information around why I chose this style.
+
+I Had to update this to be an object so I could have separate error and loading states for the UI, as I wanted the search button to disable when animating and the bottom to show a spinner when loading.
+
+This now has problems with resetting the animations as the components are remounting so I will have to think up something else.

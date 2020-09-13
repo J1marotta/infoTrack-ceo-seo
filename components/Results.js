@@ -3,34 +3,35 @@ import { useState, useEffect } from 'react'
 import styles from '../styles/Results.module.css'
 import { animationProps } from './index'
 import useStore from '../store/store'
+import loaderStyles from '../styles/Loader.module.css'
 
-const Results = ({ mode, googleSeo, bingSeo }) => {
-  const { status } = useStore()
+const Results = ({ mode }) => {
+  const { googleSeo, bingSeo, status } = useStore()
 
-  const animateIncremnet = (newValue, oldValue, setter) =>
-    useEffect(() => {
-      if (newValue === oldValue) return
+  const [tempGoogle, setTempG] = useState(100)
+  const [tempBing, setTempB] = useState(100)
 
-      while (newValue <= oldValue) {
-        setter(newValue + 1)
-      }
+  useEffect(() => {
+    if (tempBing <= bingSeo) return
+    setInterval(() => setTempB(tempBing - 1), 500)
+    controls.start()
+  }, [tempBing])
 
-      controls.start({
-        scale: 1,
-        transition: {
-          type: 'spring',
-          velocity: 100,
-          stiffness: 700,
-          damping: 80,
-        },
-      })
-    }, [newValue])
+  useEffect(() => {
+    if (tempGoogle <= googleSeo) return
 
-  const [newGoogleSeo, setGoogleValue] = useState(0)
-  const [newBingSeo, setBingValue] = useState(0)
+    setInterval(() => setTempG(tempGoogle - 1), 500)
 
-  animateIncremnet(newGoogleSeo, googleSeo, setGoogleValue)
-  animateIncremnet(newBingSeo, bingSeo, setBingValue)
+    controls.start({
+      scale: 1,
+      transition: {
+        type: 'spring',
+        velocity: 700,
+        stiffness: 700,
+        damping: 80,
+      },
+    })
+  }, [tempGoogle])
 
   // transform digits to colors
   const mapRemainingToColor = transform([10, 1], ['#ff008c', '#49E20E'])
@@ -60,29 +61,27 @@ const Results = ({ mode, googleSeo, bingSeo }) => {
     },
   }
 
-  if (status.results === 'error') {
-    return <div>Sorry something went wrong please refresh</div>
-  }
-
-  if (status.results === 'loading') {
-    return <div data-testid="loader" className={styles.loader} />
-  }
-
-  if (status.results === 'ready') {
-    return (
-      <m.div
-        {...animationProps(mode)(3)(4)}
-        variants={variants.div}
-        className={styles.resultsContainer}
-      >
+  return (
+    <m.div
+      {...animationProps(mode)(3)(4)}
+      variants={variants.div}
+      className={styles.resultsContainer}
+    >
+      {status.results === 'loading' ? (
+        <div data-testid="loader" className={loaderStyles.loader} />
+      ) : null}
+      {status.results === 'error' ? (
+        <div>Sorry something went wrong please refresh</div>
+      ) : null}
+      <>
         <div className="results">
           <m.div variants={variants.results}>
             GOOGLE:
             <m.div
               animate={controls}
-              style={{ color: mapRemainingToColor(newGoogleSeo) }}
+              style={{ color: mapRemainingToColor(tempGoogle) }}
             >
-              {newGoogleSeo}
+              {tempGoogle}
             </m.div>
           </m.div>
         </div>
@@ -92,13 +91,15 @@ const Results = ({ mode, googleSeo, bingSeo }) => {
             BING:
             <m.div
               animate={controls}
-              style={{ color: mapRemainingToColor(newBingSeo) }}
-            ></m.div>
+              style={{ color: mapRemainingToColor(tempBing) }}
+            >
+              {tempBing}
+            </m.div>
           </m.div>
         </div>
-      </m.div>
-    )
-  }
+      </>
+    </m.div>
+  )
 }
 
 export default Results
