@@ -18,6 +18,7 @@ const LoadingComponent = () => {
   return status.results === 'loading' ? (
     <div className={styles.loaderContainer}>
       <m.div
+        data-testid="loader"
         {...animationProps}
         variants={variants}
         className={styles.loader}

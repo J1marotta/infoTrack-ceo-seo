@@ -85,6 +85,8 @@ const Search = () => {
   return (
     <m.div {...animationProps(mode)(2)(2.5)} variants={variants.div}>
       <m.form
+        role="form"
+        name="search form"
         variants={variants.form}
         onSubmit={(e) => {
           e.preventDefault()
@@ -105,6 +107,8 @@ const Search = () => {
           </m.label>
 
           <m.input
+            min={2}
+            required
             disabled={status.search !== 'ready'}
             variants={variants.input}
             type="text"
