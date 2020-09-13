@@ -2,8 +2,11 @@ import { motion as m, transform, useAnimation } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import styles from '../styles/Results.module.css'
 import { animationProps } from './index'
+import useStore from '../store/store'
 
 const Results = ({ mode, googleSeo, bingSeo }) => {
+  const { status } = useStore()
+
   const animateIncremnet = (newValue, oldValue, setter) =>
     useEffect(() => {
       if (newValue === oldValue) return
@@ -57,35 +60,45 @@ const Results = ({ mode, googleSeo, bingSeo }) => {
     },
   }
 
-  return (
-    <m.div
-      {...animationProps(mode)(3)(4)}
-      variants={variants.div}
-      className={styles.resultsContainer}
-    >
-      <div className="results">
-        <m.div variants={variants.results}>
-          GOOGLE:
-          <m.div
-            animate={controls}
-            style={{ color: mapRemainingToColor(newGoogleSeo) }}
-          >
-            {newGoogleSeo}
-          </m.div>
-        </m.div>
-      </div>
+  if (status.results === 'error') {
+    return <div>Sorry something went wrong please refresh</div>
+  }
 
-      <div className="results">
-        <m.div variants={variants.results}>
-          BING:
-          <m.div
-            animate={controls}
-            style={{ color: mapRemainingToColor(newBingSeo) }}
-          ></m.div>
-        </m.div>
-      </div>
-    </m.div>
-  )
+  if (status.results === 'loading') {
+    return <div data-testid="loader" className={styles.loader} />
+  }
+
+  if (status.results === 'ready') {
+    return (
+      <m.div
+        {...animationProps(mode)(3)(4)}
+        variants={variants.div}
+        className={styles.resultsContainer}
+      >
+        <div className="results">
+          <m.div variants={variants.results}>
+            GOOGLE:
+            <m.div
+              animate={controls}
+              style={{ color: mapRemainingToColor(newGoogleSeo) }}
+            >
+              {newGoogleSeo}
+            </m.div>
+          </m.div>
+        </div>
+
+        <div className="results">
+          <m.div variants={variants.results}>
+            BING:
+            <m.div
+              animate={controls}
+              style={{ color: mapRemainingToColor(newBingSeo) }}
+            ></m.div>
+          </m.div>
+        </div>
+      </m.div>
+    )
+  }
 }
 
 export default Results

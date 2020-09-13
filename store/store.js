@@ -10,10 +10,14 @@ const useStore = create((set) => ({
   mode: 'business',
   setMode: () =>
     set((state) => ({
-      status: 'animating',
+      status: { ...state.status, search: 'animating' },
       mode: state.mode === 'business' ? 'fancy' : 'business',
     })),
-  status: 'ready',
+  status: {
+    page: 'ready',
+    search: 'ready',
+    results: 'ready',
+  },
 }))
 
 export default useStore

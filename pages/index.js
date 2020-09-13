@@ -15,7 +15,7 @@ export default function Home() {
         backgroundColor: '#6c6c6c',
       },
       fancy: {
-        backgroundColor: 'white',
+        backgroundColor: '#fff',
         transitionEnd: {
           fontFamliy: 'Courier',
         },
@@ -23,15 +23,11 @@ export default function Home() {
     },
   }
 
-  if (status === 'error') {
+  if (status.page === 'error') {
     return <div>Sorry something went wrong please refresh</div>
   }
 
-  if (status === 'loading') {
-    return <div>...</div>
-  }
-
-  if (status === 'ready') {
+  if (status.page === 'ready') {
     return (
       <AnimateSharedLayout>
         <m.div
@@ -44,6 +40,7 @@ export default function Home() {
             <Search />
 
             <Switch setMode={setMode} />
+
             <Results />
             <footer
               className={mode === 'fancy' ? styles.footerAlign : styles.footer}

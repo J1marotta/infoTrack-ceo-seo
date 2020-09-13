@@ -103,7 +103,7 @@ const Search = () => {
           </m.label>
 
           <m.input
-            disabled={status !== 'ready'}
+            disabled={status.search !== 'ready'}
             variants={variants.input}
             type="text"
             id="searchInput"
@@ -136,7 +136,7 @@ const Search = () => {
               {...sharedButtonProps(mode)}
               variants={variants.button}
               type="button"
-              onClick={() => setState({ searchQuery: '' })}
+              onClick={() => set('searchQuery')('')}
             >
               <m.label
                 htmlFor="clear"

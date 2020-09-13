@@ -5,28 +5,38 @@ export const fetchData = async ({ searchQuery, mode, set }) => {
   const google = `https://sudden-magic-pressure.glitch.me/google/business`
   const bing = `https://sudden-magic-pressure.glitch.me/bing/business`
 
-  set('status')('loading')
+  set('status')({
+    page: 'ready',
+    search: 'ready',
+    results: 'loading',
+  })
 
   const baseUrl = google
 
-  const searchUrl = `${baseUrl}/search?q=${query}`
+  const searchUrl = `${baseUrl}/search?q=${searchQuery}`
 
   const url = searchUrl
 
   try {
-    if (query.length > 2) {
-      const results = await axios.request({
-        method: 'get',
-        url,
-      })
+    const results = await axios.request({
+      method: 'get',
+      url,
+    })
 
-      console.log({ results })
-    }
+    console.log({ results })
   } catch (e) {
     console.error({ e })
-    set('status')('error')
+    set('status')({
+      page: 'ready',
+      search: 'ready',
+      results: 'error',
+    })
     throw new Error('Fetch Failed, check the API')
   } finally {
-    set('status')('ready')
+    set('status')({
+      page: 'ready',
+      search: 'ready',
+      results: 'ready',
+    })
   }
 }

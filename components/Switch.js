@@ -3,7 +3,7 @@ import { animationProps } from './index'
 import styles from '../styles/Switch.module.css'
 import useStore from '../store/store'
 
-const Switch = () => {
+const Switch = ({ setMode }) => {
   const { mode, set } = useStore()
 
   const variants = {
@@ -80,7 +80,11 @@ const Switch = () => {
         onClick={() => {
           setMode()
           setTimeout(() => {
-            set('status')('ready')
+            set('status')({
+              page: 'ready',
+              search: 'ready',
+              results: 'ready',
+            })
           }, 2500)
         }}
         tabIndex={0}
