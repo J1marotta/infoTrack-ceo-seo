@@ -1,9 +1,19 @@
 import axios from 'axios'
+import useStore from './store'
 
-export const fetchData = async ({ searchQuery, mode = 'google', set }) => {
-  // use mode here
-  const googleUrl = `https://sudden-magic-pressure.glitch.me/google/${mode}/${searchQuery}`
-  const bingUrl = `https://sudden-magic-pressure.glitch.me/bing/${mode}/${searchQuery}`
+export const fetchData = async ({
+  searchQuery,
+  mode,
+  set,
+  googleData,
+  bingData,
+}) => {
+  // if we use fancy mode we should hit the real google/bing (not yet implemented)
+
+  const urls = [
+    `https://sudden-magic-pressure.glitch.me/google/${mode}/${searchQuery}`,
+    `https://sudden-magic-pressure.glitch.me/bing/${mode}/${searchQuery}`,
+  ]
 
   set('status')({
     page: 'ready',
@@ -11,15 +21,21 @@ export const fetchData = async ({ searchQuery, mode = 'google', set }) => {
     results: 'loading',
   })
 
-  const url = googleUrl
-
   try {
-    const results = await axios.request({
+    const googleResults = await axios.request({
       method: 'get',
-      url,
+      url: urls[0],
     })
 
-    console.log({ results })
+    const bingResults = await axios.request({
+      method: 'get',
+      url: urls[1],
+    })
+
+    set('googleData')(googleResults.data)
+    set('bingData')(bingResults.data)
+
+    console.log('done', useStore.getState())
   } catch (e) {
     console.error({ e })
     set('status')({

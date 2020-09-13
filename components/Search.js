@@ -5,7 +5,7 @@ import { fetchData } from '../store/FetchData'
 import useStore from '../store/store'
 
 const Search = () => {
-  const { mode, searchQuery, status, set } = useStore()
+  const { mode, searchQuery, status, set, googleData, bingData } = useStore()
 
   const searchLabel =
     mode === 'fancy' ? 'Seo Search' : 'Enter Search Parameters for Seo Search'
@@ -78,7 +78,7 @@ const Search = () => {
   }
 
   const sharedButtonProps = (mode) => ({
-    whileHover: { scale: mode === 'fancy' ? 1.2 : 1 },
+    whileHover: { scale: mode === 'fancy' ? 1.01 : 1 },
     whileTap: { scale: mode === 'fancy' ? 0.9 : 1 },
   })
 
@@ -93,6 +93,8 @@ const Search = () => {
             searchQuery,
             mode,
             set,
+            googleData,
+            bingData,
           })
         }}
         className={styles.searchContainer}

@@ -3,38 +3,32 @@ import { useState, useEffect } from 'react'
 import styles from '../styles/Results.module.css'
 import { animationProps } from './index'
 import useStore from '../store/store'
-import loaderStyles from '../styles/Loader.module.css'
 
-const Results = ({ mode }) => {
-  const { googleSeo, bingSeo, status } = useStore()
+const dummyData = [
+  {
+    Page02: [],
+  },
+  {
+    Page01: [0],
+  },
+  {
+    Page03: [],
+  },
+  {
+    Page04: [],
+  },
+  {
+    Page05: [],
+  },
+].sort((a, b) => a - b)
 
-  const [tempGoogle, setTempG] = useState(100)
-  const [tempBing, setTempB] = useState(100)
+const Results = () => {
+  const { googleData, bingData, mode } = useStore()
 
-  useEffect(() => {
-    if (tempBing <= bingSeo) return
-    setInterval(() => setTempB(tempBing - 1), 500)
-    controls.start()
-  }, [tempBing])
-
-  useEffect(() => {
-    if (tempGoogle <= googleSeo) return
-
-    setInterval(() => setTempG(tempGoogle - 1), 500)
-
-    controls.start({
-      scale: 1,
-      transition: {
-        type: 'spring',
-        velocity: 700,
-        stiffness: 700,
-        damping: 80,
-      },
-    })
-  }, [tempGoogle])
+  const colors = mode === 'fancy' ? ['#f4dd03', '#00d4ff'] : ['#333', '#6c6c6c']
 
   // transform digits to colors
-  const mapRemainingToColor = transform([10, 1], ['#ff008c', '#49E20E'])
+  const mapRemainingToColor = transform([10, 1], colors)
   const controls = useAnimation()
 
   const variants = {
@@ -43,20 +37,22 @@ const Results = ({ mode }) => {
         borderWidth: '2px',
         borderStyle: 'inset',
         borderColor: 'black',
-        boxShadow: 'none',
+        boxShadow: '0 0px 0px 0px rgba(149, 169, 179, 0)',
         height: 'fit-content',
-        borderRadius: '5%',
+        borderRadius: '0%',
         padding: '0px',
         fontFamily: 'Times',
+        height: 'min-content',
       },
 
       fancy: {
         borderStyle: 'none',
         height: '100px',
-        boxShadow: '0 7px 30px -10px #95a9b3',
+        boxShadow: '0 7px 30px -10px rgba(149, 169, 179, 1)',
         borderRadius: '5%',
         padding: '10px',
         fontFamily: 'Courier',
+        height: 'min-content',
       },
     },
   }
@@ -67,37 +63,23 @@ const Results = ({ mode }) => {
       variants={variants.div}
       className={styles.resultsContainer}
     >
-      {status.results === 'loading' ? (
-        <div data-testid="loader" className={loaderStyles.loader} />
-      ) : null}
-      {status.results === 'error' ? (
-        <div>Sorry something went wrong please refresh</div>
-      ) : null}
-      <>
-        <div className="results">
-          <m.div variants={variants.results}>
-            GOOGLE:
-            <m.div
-              animate={controls}
-              style={{ color: mapRemainingToColor(tempGoogle) }}
-            >
-              {tempGoogle}
-            </m.div>
+      <div className="results">
+        <m.div variants={variants.results}>
+          GOOGLE:
+          <m.div animate={controls} style={{ height: 'fit-content' }}>
+            <pre>{JSON.stringify(dummyData, null, 2)}</pre>
           </m.div>
-        </div>
+        </m.div>
+      </div>
 
-        <div className="results">
-          <m.div variants={variants.results}>
-            BING:
-            <m.div
-              animate={controls}
-              style={{ color: mapRemainingToColor(tempBing) }}
-            >
-              {tempBing}
-            </m.div>
+      <div className="results">
+        <m.div variants={variants.results}>
+          BING:
+          <m.div animate={controls} style={{ height: 'fit-content' }}>
+            <pre>{JSON.stringify(dummyData, null, 2)}</pre>
           </m.div>
-        </div>
-      </>
+        </m.div>
+      </div>
     </m.div>
   )
 }

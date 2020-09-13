@@ -20,7 +20,7 @@
 
 @media (min-aspect-ratio: 4/3) {
   .grid {
-    grid-template-rows: 1fr 1fr 1fr 2fr;
+    grid-template-rows: 1fr 0.1fr 1.5fr 2fr;
   }
 }
 

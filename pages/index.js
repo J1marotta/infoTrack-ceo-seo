@@ -1,10 +1,17 @@
 import { motion as m, AnimateSharedLayout } from 'framer-motion'
 import styles from '../styles/Home.module.css'
 import useStore from '../store/store'
-import { Search, Switch, Meta, Results, animationProps } from '../components'
+import {
+  Search,
+  Switch,
+  Meta,
+  Results,
+  animationProps,
+  ErrorComponent,
+} from '../components'
 
 export default function Home() {
-  const { status, mode, setMode } = useStore()
+  const { mode, setMode } = useStore()
 
   const footerWords = (mode) =>
     mode === 'business' ? `CEO SEO - Powered by: ` : ''
@@ -23,44 +30,40 @@ export default function Home() {
     },
   }
 
-  if (status.page === 'error') {
-    return <div>Sorry something went wrong please refresh</div>
-  }
+  return (
+    <AnimateSharedLayout>
+      <m.div
+        {...animationProps(mode)(1.5)(2.5)}
+        variants={variants.container}
+        className={styles.container}
+      >
+        <Meta />
+        <div className={styles.grid}>
+          <Search />
 
-  if (status.page === 'ready') {
-    return (
-      <AnimateSharedLayout>
-        <m.div
-          {...animationProps(mode)(1.5)(2.5)}
-          variants={variants.container}
-          className={styles.container}
-        >
-          <Meta />
-          <div className={styles.grid}>
-            <Search />
+          <Switch setMode={setMode} />
 
-            <Switch setMode={setMode} />
+          <Results />
 
-            <Results />
-            <footer
-              className={mode === 'fancy' ? styles.footerAlign : styles.footer}
+          <footer
+            className={mode === 'fancy' ? styles.footerAlign : styles.footer}
+          >
+            <a
+              href="https://InfoTrack.com.au"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              <a
-                href="https://InfoTrack.com.au"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {footerWords(mode)}
-                <img
-                  src="/logo.png"
-                  alt="InfoTrack Logo"
-                  className={styles.logo}
-                />
-              </a>
-            </footer>
-          </div>
-        </m.div>
-      </AnimateSharedLayout>
-    )
-  }
+              {footerWords(mode)}
+              <img
+                src="/logo.png"
+                alt="InfoTrack Logo"
+                className={styles.logo}
+              />
+            </a>
+          </footer>
+        </div>
+      </m.div>
+      <ErrorComponent />
+    </AnimateSharedLayout>
+  )
 }
