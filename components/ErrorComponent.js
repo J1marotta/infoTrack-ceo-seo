@@ -31,9 +31,6 @@ const ErrorComponent = () => {
           Something went wrong while fetching the results, try refreshing
         </div>
       ) : null}
-      {status.results === 'loading' ? (
-        <div data-testid="loader" className={styles.loader} />
-      ) : null}
     </m.div>
   )
 }

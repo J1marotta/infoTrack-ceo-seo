@@ -16,7 +16,7 @@ const useStore = create((set) => ({
   status: {
     page: 'ready',
     search: 'ready',
-    results: 'ready',
+    results: 'loading',
   },
 }))
 

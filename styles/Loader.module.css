@@ -10,7 +10,7 @@
   animation: load7 1.8s infinite ease-in-out;
 }
 .loader {
-  color: #d6d6d6;
+  color: #704d4d;
   font-size: 10px;
   margin: auto auto;
   position: relative;
@@ -58,4 +58,8 @@
 
 .errorbox {
   position: absolute;
+}
+
+.loaderContainer {
+  height: 60px;
 }

@@ -2,6 +2,7 @@ import { motion as m } from 'framer-motion'
 import { animationProps } from './index'
 import styles from '../styles/Switch.module.css'
 import useStore from '../store/store'
+import { LoadingComponent } from './index'
 
 const Switch = ({ setMode }) => {
   const { mode, set } = useStore()
@@ -71,6 +72,7 @@ const Switch = ({ setMode }) => {
       variants={variants.div}
       className={styles.switchContainer}
     >
+      <LoadingComponent />
       <m.button
         variants={variants.switch}
         className={styles.switch}

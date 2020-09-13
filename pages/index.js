@@ -8,6 +8,7 @@ import {
   Results,
   animationProps,
   ErrorComponent,
+  LoadingComponent,
 } from '../components'
 
 export default function Home() {
@@ -32,7 +33,6 @@ export default function Home() {
 
   return (
     <AnimateSharedLayout>
-      <ErrorComponent />
       <m.div
         {...animationProps(mode)(1.5)(2.5)}
         variants={variants.container}
@@ -46,6 +46,7 @@ export default function Home() {
 
           <Results />
 
+          <ErrorComponent />
           <footer
             className={mode === 'fancy' ? styles.footerAlign : styles.footer}
           >
